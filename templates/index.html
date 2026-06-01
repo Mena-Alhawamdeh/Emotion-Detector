@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detector</title>
+    <script>
+        function RunEmotionDetection() {
+            let textToAnalyze = document.getElementById("textToAnalyze").value;
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("system_response").innerHTML = xhttp.responseText;
+                }
+            };
+            xhttp.open("GET", "/emotionDetector?textToAnalyze=" + textToAnalyze, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px;">
+    <h2>Emotion Detector</h2>
+    <p>Enter text below to analyze the emotions:</p>
+    <textarea id="textToAnalyze" rows="4" cols="50" placeholder="Type your sentence here..."></textarea><br><br>
+    <button onclick="RunEmotionDetection()" style="padding: 10px 20px; cursor: pointer;">Analyze Emotion</button>
+    <br><br>
+    <div id="system_response" style="font-weight: bold; color: #333;"></div>
+</body>
+</html>
